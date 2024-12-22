@@ -3,6 +3,10 @@
 //$opts = array('http' => array('proxy'=> 'tcp://127.0.0.1:8080', 'request_fulluri'=> true), 'ssl' => array( 'verify_peer' => false, 'verify_peer_name' => false));
 //$context = stream_context_create($opts);
 //stream_context_set_default($opts);
+if ($_SERVER['HTTP_HOST'] === 'webetu.iutnc.univ-lorraine.fr') {
+    $opts = array('http' => array('proxy'=> 'tcp://127.0.0.1:8080', 'request_fulluri'=> true), 'ssl' => array( 'verify_peer' => false, 'verify_peer_name' => false));
+    stream_context_set_default($opts);
+}
 
 $ipApiUrl = "http://ip-api.com/json";
 $incidentUrl= "https://carto.g-ny.org/data/cifs/cifs_waze_v2.json";
@@ -17,7 +21,8 @@ function createMeteoUrl($format = 'xml', $lon = 6.15083, $lat = 48.67103){
 $adresseApiUrl = "https://api-adresse.data.gouv.fr/search";
 
 //get the ip info with ip-api
-$ipInfo = file_get_contents($ipApiUrl."/".$_SERVER['REMOTE_ADDR']);
+$ipInfo = file_get_contents($ipApiUrl."/".$_SERVER['REMOTE_ADDR'], false);
+
 $ipInfo = json_decode($ipInfo, true);
 $client = ['useUserLocation' => true];
 
