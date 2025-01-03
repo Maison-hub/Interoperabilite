@@ -39,10 +39,10 @@
     <!-- Template pour la température -->
     <xsl:template match="temperature">
         <xsl:choose>
-            <xsl:when test="level/@val &lt; 0">
+            <xsl:when test="level - 273.15 &lt; 8">
                 <span class="bad">❄️ Froid</span>
             </xsl:when>
-            <xsl:when test="level/@val &gt; 20">
+            <xsl:when test="level - 273.15 &gt; 20">
                 <span>🔥 Chaud</span>
             </xsl:when>
             <xsl:otherwise>

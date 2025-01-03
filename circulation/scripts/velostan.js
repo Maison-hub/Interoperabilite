@@ -14,6 +14,29 @@ function initMap() {
         minZoom: 1,
         maxZoom: 20
     }).addTo(macarte);
+    // Vérifier si le navigateur supporte la géolocalisation
+    const redIcon = L.icon({
+        iconUrl: './assets/marker/markerMoi.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+    });
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const userLat = position.coords.latitude;
+            const userLon = position.coords.longitude;
+            // Ajouter un marqueur à la position de l'utilisateur
+            L.marker([userLat, userLon], {icon: redIcon}).addTo(macarte)
+                .bindPopup('Vous êtes ici')
+                .openPopup();
+            // Centrer la carte sur la position de l'utilisateur
+            macarte.setView([userLat, userLon], 13);
+        }, function(error) {
+            console.error('Erreur de géolocalisation: ' + error.message);
+        });
+    } else {
+        console.error('La géolocalisation n\'est pas supportée par ce navigateur.');
+    }
 }
 initMap();
 Promise.all([
@@ -35,18 +58,18 @@ Promise.all([
     const stas = data[0].data.stations;
     const placeStations=data[1].data.stations;
 
-    console.log(stas);
 
-    // const markerPlan = L.icon({
-    //     iconSize: [40, 40],
-    //     iconAnchor: [22, 55],
-    //     popupAnchor: [-3, -50],
-    // });
+    const markerPlan = L.icon({
+        iconUrl: './assets/marker/marker.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+    });
     for(let i = 0; i<stas.length; i++) {
         //get the placeStations with the id of stas[i].station_id
         const currStas = stas[i];
         const infostas = placeStations.filter(placeStation => placeStation.station_id === currStas.station_id)[0];
-        console.log(infostas);
-        L.marker([currStas.lat, currStas.lon]).addTo(macarte)
-            .bindPopup(`<strong>${currStas.name}</strong><br></br>${infostas.num_docks_available} places disponibles<br></br>${infostas.num_bikes_available} vélos disponibles`);}
+        L.marker([currStas.lat, currStas.lon], {icon: markerPlan}).addTo(macarte)
+            .bindPopup(`<strong>${currStas.name}</strong><br></br>${infostas.num_docks_available} places disponibles<br></br>${infostas.num_bikes_available} vélos disponibles`);
+    }
 });

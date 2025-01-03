@@ -7,6 +7,9 @@
 
     <link rel="stylesheet" href="./assets/css/style.css">
 
+
+    <link rel="stylesheet" href="./assets/css/global.css">
+
     <!--Leaflet css-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -18,14 +21,23 @@
 
 </head>
 <body>
-
-    <canvas id="covidChart"></canvas>
-    <div id="map"></div>
+    <section id="sec1">
+        <div class="chartContainer">
+            <canvas id="covidChart"></canvas>
+        </div>
+        <div id="airQuality"></div>
+    </section>
+    <section id="sec2">
+        <div id="map"></div>
+        <div id="meteo" class="echeances"></div>
+    </section>
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="scripts/covid.js"></script>
     <script src="scripts/velostan.js"></script>
+    <script src="scripts/airQuality.js"></script>
+    <script src="scripts/meteo.js"></script>
 
 </body>
 </html>

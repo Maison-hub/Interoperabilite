@@ -35,6 +35,7 @@ async function createCovidChart() {
             }]
         },
         options: {
+            responsive: true,
             scales: {
                 y: {
                     beginAtZero: true
