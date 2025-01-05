@@ -1,6 +1,20 @@
 let infoUrl="https://api.cyclocity.fr/contracts/nancy/gbfs/station_information.json";
 let stationUrl="https://api.cyclocity.fr/contracts/nancy/gbfs/station_status.json";
 
+const velostanApi1 = document.getElementById("velostanApi1");
+const aLink1 = document.createElement("a");
+aLink1.href = infoUrl;
+aLink1.target = "_blank";
+aLink1.textContent = "API Vélostan 1";
+velostanApi1.appendChild(aLink1)
+
+const velostanApi2 = document.getElementById("velostanApi2");
+const aLink2 = document.createElement("a");
+aLink2.href = stationUrl;
+aLink2.target = "_blank";
+aLink2.textContent = "API Vélostan 2";
+velostanApi2.appendChild(aLink2)
+
 console.log('velostan.js loaded');
 
 var macarte = null;

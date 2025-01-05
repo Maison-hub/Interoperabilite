@@ -1,5 +1,11 @@
 const url = `https://tabular-api.data.gouv.fr/api/resources/2963ccb5-344d-4978-bdd3-08aaf9efe514/data/`;
 
+const meteoApi = document.getElementById("meteoApi");
+const aLink = document.createElement("a");
+aLink.href = url;
+aLink.target = "_blank";
+aLink.textContent = "API Covid";
+meteoApi.appendChild(aLink);
 
 console.log('covid.js loaded');
 const ctx = document.getElementById('covidChart');
@@ -53,6 +59,7 @@ async function createCovidChart() {
             }
         }
     });
+    document.querySelector(".chartContainer .loader").style.display = "none"
 }
 
 createCovidChart();

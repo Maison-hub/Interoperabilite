@@ -102,6 +102,7 @@ async function displayMeteoData(url) {
         console.log(data);
         const meteoHtml = createMeteoHtml(data);
         document.querySelector('#meteo').innerHTML = meteoHtml;
+        document.querySelector("#mete .loader").style.display = "none";
     }
 }
 
